@@ -20,7 +20,16 @@ public class HiService {
         return restTemplate.getForObject("http://service-hi/hi?name=" + name, String.class);
     }
 
+    @HystrixCommand(fallbackMethod = "traceError")
+    public String trace() {
+        return restTemplate.getForObject("http://service-feign/feign", String.class);
+    }
+
     String hiError(String name) {
         return "hi " + name + ",sorry,error";
+    }
+
+    String traceError() {
+        return "ee,service-feign挂啦";
     }
 }

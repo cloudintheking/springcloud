@@ -1,6 +1,8 @@
 package com.fatboa.servicefeign.service.fallback;
 
 import com.fatboa.servicefeign.service.HiService;
+import com.fatboa.servicefeign.service.TraceService;
+import org.aspectj.weaver.tools.Trace;
 import org.springframework.stereotype.Component;
 
 /**
@@ -9,9 +11,14 @@ import org.springframework.stereotype.Component;
  * @description:
  */
 @Component
-public class HiServiceHystric implements HiService {
+public class HiServiceHystric implements HiService, TraceService {
     @Override
     public String sayHiFromOneClient(String name) {
         return "sorry," + name;
+    }
+
+    @Override
+    public String trace() {
+        return "ee,service-ribbon挂啦";
     }
 }
